@@ -6,6 +6,7 @@
                         :type="'number'"
                         placeholder="От"
                         class="search-form-meter__input"
+                        @input="setMinMeter($event)"
                 />
             </div>
             <div class="search-form-meter__col">
@@ -13,6 +14,7 @@
                         :type="'number'"
                         placeholder="До"
                         class="search-form-meter__input"
+                        @input="setMaxMeter($event)"
                 />
             </div>
             <div class="search-form-meter__col">
@@ -31,6 +33,7 @@
 <script>
     import TextInput from "@/components/elements/input/TextInput";
     import TransparentButton from "@/components/elements/buttons/TransparentButton";
+    import {mapMutations} from "vuex";
 
     export default {
         name: "SearchFormMeter",
@@ -43,6 +46,12 @@
                 type: Boolean,
                 default: false
             }
+        },
+        methods: {
+            ...mapMutations('searchForm', [
+                'setMinMeter',
+                'setMaxMeter',
+            ]),
         }
     }
 </script>

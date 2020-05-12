@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import {mapActions, mapState} from 'vuex'
+    import {mapActions, mapState, mapGetters} from 'vuex'
     import SearchFormMain from "@/components/search/form/SearchFormMain";
     import SearchFormPrice from "@/components/search/form/SearchFormPrice";
     import SearchFormMeter from "@/components/search/form/SearchFormMeter";
@@ -41,6 +41,9 @@
                 isSearchForPrice: state => state.isSearchForPrice,
                 isSearchForMeter: state => state.isSearchForMeter
             }),
+            ...mapGetters('searchForm', [
+                'getSubmitData'
+            ])
         },
         methods: {
             ...mapActions('searchForm', [
@@ -49,6 +52,7 @@
             ]),
             submitForm(e) {
                 console.log(e)
+                console.log(this.getSubmitData)
                 // todo тут могла бы быть отправка данных на сервер
             }
         }

@@ -5,6 +5,7 @@
                 <TextInput
                         class="search-form-main_border-radius_left"
                         placeholder="Введите название объекта (бизнес-центра, торгового центра, новостройки, логопарка)"
+                        @input="setName($event)"
                 />
             </div>
             <template v-else>
@@ -12,18 +13,21 @@
                     <Select
                             class="search-form-main__select search-form-main_border-radius_left"
                             :options="cityOptions"
+                            @change="setCity($event)"
                     />
                 </SelectArrow>
                 <SelectArrow class="search-form-main__col search-form-main_border-left">
                     <Select
                             class="search-form-main__select"
                             :options="actionOptions"
+                            @change="setAction($event)"
                     />
                 </SelectArrow>
                 <SelectArrow class="search-form-main__col search-form-main_border-left">
                     <Select
                             class="search-form-main__select"
                             :options="typeOptions"
+                            @change="setType($event)"
                     />
                 </SelectArrow>
             </template>
@@ -44,6 +48,7 @@
     import SelectArrow from "@/components/elements/select/SelectArrow";
     import TextInput from "@/components/elements/input/TextInput";
     import {cityOptions, actionOptions, typeOptions} from "@/data/options";
+    import {mapMutations} from 'vuex'
 
     export default {
         name: "SearchFormMain",
@@ -63,6 +68,14 @@
             actionOptions: actionOptions,
             typeOptions: typeOptions,
         }),
+        methods: {
+            ...mapMutations('searchForm', [
+                'setName',
+                'setCity',
+                'setAction',
+                'setType',
+            ]),
+        }
     }
 </script>
 

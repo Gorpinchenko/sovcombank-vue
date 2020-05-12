@@ -6,6 +6,7 @@
                         :type="'number'"
                         placeholder="От"
                         class="search-form-price__input"
+                        @input="setMinPrice($event)"
                 />
             </div>
             <div class="search-form-price__col ">
@@ -13,12 +14,14 @@
                         :type="'number'"
                         placeholder="До"
                         class="search-form-price__input"
+                        @input="setMaxPrice($event)"
                 />
             </div>
             <SelectArrow class="search-form-price__col">
                 <Select
                         class="search-form-price__select"
                         :options="priceOptions"
+                        @change="setPriceType($event)"
                 />
             </SelectArrow>
         </template>
@@ -37,6 +40,7 @@
     import SelectArrow from "@/components/elements/select/SelectArrow";
     import TransparentButton from "@/components/elements/buttons/TransparentButton";
     import {priceOptions} from "@/data/options";
+    import {mapMutations} from "vuex";
 
     export default {
         name: "SearchFormPrice",
@@ -55,6 +59,13 @@
         data: () => ({
             priceOptions: priceOptions,
         }),
+        methods: {
+            ...mapMutations('searchForm', [
+                'setMinPrice',
+                'setMaxPrice',
+                'setPriceType',
+            ]),
+        }
     }
 </script>
 
